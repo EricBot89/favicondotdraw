@@ -3,7 +3,7 @@ const app = require("./index");
 const models = require("./models");
 const server = http.createServer(app);
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 const init = async () => {
   await models.Favicon.sync();
