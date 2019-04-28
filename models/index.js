@@ -1,11 +1,14 @@
 const sequelize = require("sequelize");
-const db = new sequelize("postgres://localhost:5432/favicon-draw");
+const databaseUrl = process.env.DATABASE_URL || 'postgres://localhost:5432/fitness-tracker'
+const db = new sequelize(databaseUrl, {
+  logging: false,
+  operatorsAliases: false
+});
 
 const Favicon = db.define("favicon", {
-	date_created: {type: sequelize.DATE, defaultValue: sequelize.NOW()},
-	resolution: sequelize.ENUM("16","32","64"),
-	buffer: sequelize.TEXT,
-})
+  date_created: { type: sequelize.DATE, defaultValue: sequelize.NOW() },
+  resolution: sequelize.ENUM("16", "32", "64"),
+  buffer: sequelize.TEXT
+});
 
-module.exports = {db, Favicon};
-
+module.exports = { db, Favicon };
